@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sfondo_frag_images"
+    tools:context=".Activities.ImageActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/relativelayout_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/image_id"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:adjustViewBounds="true" />
+
+            <TextView
+                android:id="@+id/myImageViewText_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/colorBackgroundText"
+                android:text="Titolo Punto"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="30dp"
+                android:textAppearance="@style/titoloPages"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_save_id"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_shape_gallery"
+                android:textColor="@color/coloreGalleriaTesto"
+                android:paddingEnd="30dp"
+                android:paddingStart="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="Salva questa immagine"
+                android:textAppearance="@style/testoFormattato"
+                android:drawableEnd="@drawable/save_image_gallery"
+                android:textAlignment="textStart"
+                android:drawableTint="@color/coloreGalleriaTesto"
+                android:textStyle="bold"
+                android:textSize="15dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

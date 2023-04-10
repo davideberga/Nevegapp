@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/section_condividi"
+            android:title="@string/opzioni_condividi"
+            android:checked="false"></item>
+
+        <item
+            android:id="@+id/section_guida"
+            android:title="@string/opzioni_guida"
+            android:checked="false"></item>
+
+        <item
+            android:id="@+id/section_aboutNevegapp"
+            android:title="@string/opzioni_aboutNevegapp"
+            android:checked="false"></item>
+
+        <item
+        android:id="@+id/section_aboutUs"
+        android:title="@string/opzioni_aboutUs"
+        android:checked="false"></item>
+        <item
+            android:id="@+id/section_licenza"
+            android:title="@string/opzioni_licenza"
+            android:checked="false"></item>
+        <item
+            android:id="@+id/section_bibliografia"
+            android:title="@string/opzioni_bibliografia"
+            android:checked="false"></item>
+
+        <item
+            android:id="@+id/section_crediti"
+            android:title="@string/opzioni_crediti"
+            android:checked="false"></item>
+
+        <item
+            android:id="@+id/section_esci"
+            android:title="@string/opzioni_esci"
+            android:checked="false"></item>
+    </group>
+</menu>

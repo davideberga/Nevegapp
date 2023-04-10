@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_mappa"
+        android:icon="@drawable/map_navigation"
+        android:title="@string/title_mappa" />
+
+    <item
+        android:id="@+id/navigation_punti"
+        android:icon="@drawable/punti_navigation"
+        android:title="@string/title_punti" />
+
+    <item
+        android:id="@+id/navigation_tematiche"
+        android:icon="@drawable/tematiche"
+        android:title="@string/title_tematiche"/>
+</menu>
