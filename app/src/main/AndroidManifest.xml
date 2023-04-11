@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.itisegato.nevegapp">
+    package="com.itisegato.nevegapptemp">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
@@ -20,22 +20,23 @@
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
         <activity
-            android:name="com.itisegato.nevegapp.Activities.SplashActivity"
+            android:name="com.itisegato.nevegapptemp.activities.SplashActivity"
             android:label="@string/app_name"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.itisegato.nevegapp.Activities.MainActivity"
+            android:name="com.itisegato.nevegapptemp.activities.MainActivity"
             android:label="@string/app_name"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
+            android:exported="false"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,31 +45,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.itisegato.nevegapp.Activities.MenuPuntoActivity"
+            android:name="com.itisegato.nevegapptemp.activities.MenuPuntoActivity"
             android:label="@string/title_activity_menu_punto"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.itisegato.nevegapp.Activities.MenuSezioneActivity"
+            android:name="com.itisegato.nevegapptemp.activities.MenuSezioneActivity"
             android:label="@string/title_activity_menu_sezione"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.itisegato.nevegapp.Activities.OptionsActivity"
+        <activity android:name="com.itisegato.nevegapptemp.activities.OptionsActivity"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name="com.itisegato.nevegapp.Activities.GalleriaActivity"
+        <activity android:name="com.itisegato.nevegapptemp.activities.GalleriaActivity"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:theme="@style/GalleriaTheme">
         </activity>
-        <activity android:name="com.itisegato.nevegapp.Activities.ImageActivity"
+        <activity android:name="com.itisegato.nevegapptemp.activities.ImageActivity"
             android:hardwareAccelerated="true"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="com.itisegato.nevegapp.Activities.Compass"
+            android:name="com.itisegato.nevegapptemp.activities.Compass"
             android:theme="@style/AppTheme.PopMe"></activity>
         <meta-data
             android:name="preloaded_fonts"
