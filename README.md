@@ -1,3 +1,7 @@
+
+[![pipeline status](https://berghub.bergacloud.it/Bergoglio/nevegapp/badges/main/pipeline.svg)](https://berghub.bergacloud.it/Bergoglio/nevegapp/-/commits/main)
+[![Latest Release](https://berghub.bergacloud.it/Bergoglio/nevegapp/-/badges/release.svg)](https://berghub.bergacloud.it/Bergoglio/nevegapp/-/releases)
+
 ## Il progetto
 
 Il progetto **Nevegapp** è frutto dell'idea della professoressa Arianna Sitta (I.T.E. P.F. Calvi - Belluno) e si propone come obiettivo primario la valorizzazione del territorio *bellunese*.

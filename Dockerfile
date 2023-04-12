@@ -5,7 +5,7 @@ FROM openjdk:11-jdk
 # Just matched `app/build.gradle`
 ENV ANDROID_COMPILE_SDK "33"
 # Just matched `app/build.gradle`
-ENV ANDROID_BUILD_TOOLS "30.0.6"
+ENV ANDROID_BUILD_TOOLS "30.0.3"
 # Version from https://developer.android.com/studio/releases/sdk-tools
 ENV ANDROID_SDK_TOOLS "24.4.1"
 ENV CMD_TOOLS "6858069"

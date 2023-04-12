@@ -9,6 +9,8 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -31,6 +33,9 @@ import com.itisegato.nevegapptemp.fragments.MainFragment;
 import com.itisegato.nevegapptemp.R;
 
 import static org.osmdroid.tileprovider.util.StorageUtils.getStorage;
+
+import pub.devrel.easypermissions.EasyPermissions;
+import pub.devrel.easypermissions.PermissionRequest;
 
 /**
  *  Main Activity
@@ -71,10 +76,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.INTERNET
         };
-
-        if(!hasPermission(permissions)){
-            ActivityCompat.requestPermissions(this, permissions,permissionAll);
-        }
+        
+        //EasyPermissions.requestPermissions(this, );
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -105,11 +108,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()) {
-            case R.id.bottomSensori:
-                Intent i = new Intent(this, Compass.class);
-                startActivity(i);
-                return true;
+        if (item.getItemId() == R.id.bottomSensori) {
+            Intent i = new Intent(this, Compass.class);
+            startActivity(i);
+            return true;
         }
         if(mtoggle.onOptionsItemSelected(item)){
             if (!drawer.isDrawerOpen(GravityCompat.START))
@@ -157,14 +159,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private boolean hasPermission(String[] permissions){
-            for (String permission : permissions) {
-                if (ContextCompat.checkSelfPermission(this, permission)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-        }
-        return true;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
