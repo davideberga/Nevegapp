@@ -81,8 +81,9 @@ testDebug:
   dependencies: []
   before_script:
     - chmod +x gradlew
+    - echo $google_play_service_account_api_key_json > /google_play_api_key.json
   after_script:
-    - rm -f key.jks
+    - rm /google_play_api_key.json
 
 publishInternal:
   extends: .promote_job
@@ -109,8 +110,6 @@ promoteBeta:
 promoteProduction:
   extends: .promote_job
   stage: production
-  # We only allow production promotion on master because
-  # in this way you can protect production scoped secret variables
   only:
    - main
   script:
