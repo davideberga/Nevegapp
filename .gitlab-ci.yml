@@ -83,7 +83,7 @@ testDebug:
     - echo You need to add your google_play_api_key.json file for this to work. Please see project's README.md. && false
     - chmod +x gradlew
   after_script:
-    - rm -f ~/google_play_api_key.json
+    - rm -f key.jks
 
 publishInternal:
   extends: .promote_job
