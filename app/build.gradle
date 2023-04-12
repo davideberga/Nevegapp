@@ -23,7 +23,6 @@ android {
     namespace = "com.itisegato.nevegapptemp"
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
-        buildToolsVersion "30.0.3"
         applicationId "com.itisegato.nevegapptemp"
         minSdkVersion 21
         targetSdkVersion 33
@@ -43,7 +42,6 @@ android {
         release {
             minifyEnabled false
             testCoverageEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
     }
