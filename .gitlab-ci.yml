@@ -112,7 +112,7 @@ promoteProduction:
   # We only allow production promotion on master because
   # in this way you can protect production scoped secret variables
   only:
-   - master
+   - main
   script:
     - bundle exec fastlane promote_beta_to_production
 
