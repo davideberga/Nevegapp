@@ -81,9 +81,11 @@ testDebug:
   dependencies: []
   before_script:
     - chmod +x gradlew
+    - echo "$signing_jks_file_hex" | xxd -r -p - > /android-signing-keystore.jks
     - echo $google_play_service_account_api_key_json > /google_play_api_key.json
   after_script:
     - rm /google_play_api_key.json
+    - rm /android-signing-keystore.jks
 
 publishInternal:
   extends: .promote_job
