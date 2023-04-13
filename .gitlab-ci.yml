@@ -48,11 +48,14 @@ ensureContainer:
   before_script:
     - chmod +x gradlew
     - bundle update fastlane
+    - echo "$signing_jks_file_hex" | xxd -r -p - > /android-signing-keystore.jks
     - "export VERSION_CODE=$(($CI_PIPELINE_IID)) && echo $VERSION_CODE"
     - "export VERSION_SHA=`echo ${CI_COMMIT_SHA:0:8}` && echo $VERSION_SHA"
   artifacts:
     paths:
     - app/build/outputs
+  after_script:
+    - rm /android-signing-keystore.jks
 
 buildDebug:
   extends: .build_job
