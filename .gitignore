@@ -2,3 +2,4 @@
 .gradle
 local.properties
 /.idea/
+fastlane/report.xml
