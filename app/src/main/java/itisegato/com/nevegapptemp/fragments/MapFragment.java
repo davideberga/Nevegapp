@@ -1,11 +1,14 @@
 package itisegato.com.nevegapptemp.fragments;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -36,6 +39,7 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import egolabsapps.basicodemine.offlinemap.Interfaces.GeoPointListener;
 import itisegato.com.nevegapptemp.classes.GeneraArrayPunti;
@@ -45,6 +49,7 @@ import itisegato.com.nevegapptemp.classes.Punto;
 import itisegato.com.nevegapptemp.R;
 import itisegato.com.nevegapptemp.utils.GpxParser;
 import itisegato.com.nevegapptemp.utils.LocListener;
+import pub.devrel.easypermissions.EasyPermissions;
 
 /**
  * Created by Davide on 17/01/2018.
@@ -55,7 +60,7 @@ import itisegato.com.nevegapptemp.utils.LocListener;
  *
  */
 
-public class MapFragment extends Fragment {
+public class MapFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
 
     protected MapView map;
     protected IMapController controllore = null;
@@ -87,6 +92,18 @@ public class MapFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        String[] permissions = {
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.INTERNET
+        };
+
+        if(requireActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                requireActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            requireActivity().requestPermissions(permissions, 10);
+
         View v = inflater.inflate(R.layout.map_fragment, container, false);
         fabPosition = v.findViewById(R.id.fabPosition);
         btnIndietro = v.findViewById(R.id.bottoneIndietro);
@@ -97,7 +114,10 @@ public class MapFragment extends Fragment {
         textPuntoSelezionato = v.findViewById(R.id.textViewPuntoAttuale);
         textPuntoSelezionato.setText("...");
         map = (MapView) v.findViewById(R.id.mapView);
-        mapLoadSuccess(map);
+
+        if(requireActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+                requireActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            mapLoadSuccess(map);
         puntoAttuale = -1;
         return v;
     }
@@ -286,5 +306,17 @@ public class MapFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onPermissionsGranted(int i, @NonNull List<String> list) {
+        if(requireActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+                requireActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            mapLoadSuccess(map);
+    }
+
+    @Override
+    public void onPermissionsDenied(int i, @NonNull List<String> list) {
+
     }
 }
