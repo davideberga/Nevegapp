@@ -1,6 +1,6 @@
 # This Dockerfile creates a static build image for CI
 
-FROM openjdk:23-slim-bullseye
+FROM openjdk:21-slim-bullseye
 
 # Just matched `app/build.gradle`
 ENV ANDROID_COMPILE_SDK "34"
