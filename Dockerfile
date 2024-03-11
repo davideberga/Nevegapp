@@ -3,7 +3,7 @@
 FROM openjdk:11-jdk
 
 # Just matched `app/build.gradle`
-ENV ANDROID_COMPILE_SDK "33"
+ENV ANDROID_COMPILE_SDK "34"
 # Just matched `app/build.gradle`
 ENV ANDROID_BUILD_TOOLS "30.0.3"
 # Version from https://developer.android.com/studio/releases/sdk-tools
