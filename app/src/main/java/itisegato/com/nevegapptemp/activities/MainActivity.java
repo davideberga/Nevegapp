@@ -68,12 +68,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         int permissionAll = 1;
-        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        String[] permissions = {
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.INTERNET
         };
-        
-        //EasyPermissions.requestPermissions(this, );
+        if(!EasyPermissions.hasPermissions(this, permissions))
+            requestPermissions(permissions, 10);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -158,8 +159,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+        //EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

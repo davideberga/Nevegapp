@@ -12,6 +12,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 import java.util.ArrayList;
 import java.util.List;
 
+import egolabsapps.basicodemine.offlinemap.Interfaces.GeoPointListener;
 import itisegato.com.nevegapptemp.classes.GeneraArrayPunti;
 import itisegato.com.nevegapptemp.classes.MyInfoWindow;
 import itisegato.com.nevegapptemp.classes.MyOnClickMarkerListener;
@@ -43,10 +45,6 @@ import itisegato.com.nevegapptemp.classes.Punto;
 import itisegato.com.nevegapptemp.R;
 import itisegato.com.nevegapptemp.utils.GpxParser;
 import itisegato.com.nevegapptemp.utils.LocListener;
-
-import egolabsapps.basicodemine.offlinemap.Interfaces.MapListener;
-import egolabsapps.basicodemine.offlinemap.Utils.MapUtils;
-import egolabsapps.basicodemine.offlinemap.Views.OfflineMapView;
 
 /**
  * Created by Davide on 17/01/2018.
@@ -57,10 +55,8 @@ import egolabsapps.basicodemine.offlinemap.Views.OfflineMapView;
  *
  */
 
-public class MapFragment extends Fragment implements MapListener {
+public class MapFragment extends Fragment {
 
-    protected OfflineMapView offlineMap;
-    protected MapUtils mapUtils;
     protected MapView map;
     protected IMapController controllore = null;
     protected GeoPoint currentLocation = null;
@@ -100,8 +96,8 @@ public class MapFragment extends Fragment implements MapListener {
         layoutNotifica = v.findViewById(R.id.llnp);
         textPuntoSelezionato = v.findViewById(R.id.textViewPuntoAttuale);
         textPuntoSelezionato.setText("...");
-        offlineMap = v.findViewById(R.id.mapView);
-        offlineMap.init(getActivity(), this);
+        map = (MapView) v.findViewById(R.id.mapView);
+        mapLoadSuccess(map);
         puntoAttuale = -1;
         return v;
     }
@@ -115,7 +111,8 @@ public class MapFragment extends Fragment implements MapListener {
 
     @Override
     public void onPause() {
-        myLocationNewOverlay.disableMyLocation();
+        if(myLocationNewOverlay != null)
+            myLocationNewOverlay.disableMyLocation();
         super.onPause();
     }
 
@@ -140,11 +137,8 @@ public class MapFragment extends Fragment implements MapListener {
         puntoAttuale = nuovoPuntoAttuale;
     }
 
-    @SuppressLint("MissingPermission")
-    @Override
-    public void mapLoadSuccess(MapView mapView, MapUtils mapUtils) {
-        this.mapUtils = mapUtils;
-        this.map = mapUtils.getMap();
+
+    public void mapLoadSuccess(MapView mapView) {
         BoundingBox box = new BoundingBox(NORTH, EAST, SOUTH, WEST);
         map.setScrollableAreaLimitDouble(box);
         controllore = map.getController();
@@ -219,16 +213,20 @@ public class MapFragment extends Fragment implements MapListener {
 
         setupClickListeners(mapView,wayPoints);
         controllore.setCenter(new GeoPoint(wayPoints.get(6)));
-        controllore.setZoom(14);
-        map.getOverlays().add(mCopyrightOverlay);
+        controllore.setZoom(14f);
+        // map.getOverlays().add(mCopyrightOverlay);
         //mapView.invalidate();
+    }
+
+    public void activateAnimatePicker(View view) {
     }
 
     private void setupClickListeners(final MapView map, final List<Location> wayPoints){
         btnIndietro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myLocationNewOverlay.disableFollowLocation();
+                if(myLocationNewOverlay != null)
+                    myLocationNewOverlay.disableFollowLocation();
                 if(puntoAttuale==0){
                     puntoAttuale--;
                 }
@@ -248,7 +246,8 @@ public class MapFragment extends Fragment implements MapListener {
         btnAvanti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myLocationNewOverlay.disableFollowLocation();
+                if(myLocationNewOverlay != null)
+                    myLocationNewOverlay.disableFollowLocation();
                 if(puntoAttuale!=11){
                     puntoAttuale++;
                     textPuntoSelezionato.setText("Punto " + (puntoAttuale+1));
@@ -280,16 +279,12 @@ public class MapFragment extends Fragment implements MapListener {
         fabPath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myLocationNewOverlay.disableFollowLocation();
-                controllore.setZoom(14);
+                if(myLocationNewOverlay != null)
+                    myLocationNewOverlay.disableFollowLocation();
+                controllore.setZoom(14f);
                 controllore.animateTo(new GeoPoint(wayPoints.get(6)));
 
             }
         });
-    }
-
-    @Override
-    public void mapLoadFailed(String ex) {
-
     }
 }
